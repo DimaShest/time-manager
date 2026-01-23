@@ -1,0 +1,63 @@
+.menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--bg);
+	padding: 20px 0;
+	z-index: 20;
+	animation: show-menu linear 0.3s forwards;
+}
+
+@keyframes show-menu {
+	from {
+		width: 0;
+	}
+	to {
+		width: 160px;
+	}
+}
+
+.menu > h3 {
+	margin: 0px 0 10px 60px;
+}
+
+.hidenMenu {
+	position: absolute;
+	top: 12px;
+	left: 10px;
+}
+
+.hidenMenu:hover {
+	cursor: pointer;
+	border-radius: 50%;
+	padding: 6px;
+	background-color: var(--elementBg);
+}
+
+.menuItem {
+	display: flex;
+	align-items: center;
+	padding: 5px 20px;
+	border-radius: 5px;
+}
+
+.menuItem:hover {
+	cursor: pointer;
+	background-color: var(--elementBg);
+	color: var(--good);
+}
+
+.icon {
+	width: 40px;
+	height: 40px;
+	margin-right: 3px;
+	padding: 7px;
+	border-radius: 10px;
+}
+
+.text {
+	font-weight: 600;
+}

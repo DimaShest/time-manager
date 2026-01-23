@@ -1,0 +1,104 @@
+.project {
+	display: flex;
+	border-bottom: 2px solid var(--blue);
+	background: var(--elementBg);
+	border-radius: 10px;
+	margin-bottom: 10px;
+	position: relative;
+	min-height: 40px;
+	animation: show-project 0.3s linear forwards;
+}
+
+@keyframes show-project {
+	from {
+		top: -1px;
+	}
+	to {
+		top: 0;
+	}
+}
+
+.projectData {
+	width: 100%;
+	align-items: center;
+	padding: calc(1.5%);
+	display: grid;
+	grid-template-columns: 1fr 30px 30px;
+	gap: 20px;
+}
+
+.project:hover {
+	cursor: pointer;
+	position: relative;
+	animation: project-card 0.3s linear forwards;
+}
+
+@keyframes project-card {
+	from {
+		top: 0;
+	}
+	to {
+		top: -1px;
+	}
+}
+
+.priority {
+	width: 20px;
+	border-radius: 10px;
+	border: 2px solid var(--white);
+	z-index: 5;
+}
+
+.text {
+	position: relative;
+	font-weight: 600;
+}
+
+.project > span {
+	position: absolute;
+	border-radius: 10px;
+	height: 100%;
+}
+
+.settingsBtn {
+	width: 34px;
+	height: 34px;
+	padding: 5px;
+	border-radius: 10px;
+	position: relative;
+}
+
+.settingsBtn:hover {
+	background-color: var(--blue);
+}
+
+.settingsPanel {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 70px;
+	display: flex;
+	border-radius: 10px;
+	background-color: var(--blue);
+	animation: show-settings 0.3s linear forwards;
+}
+
+@keyframes show-settings {
+	from {
+		right: calc(35px + 2%);
+	}
+	to {
+		right: calc(40px + 2%);
+	}
+}
+
+.icon {
+	width: 40px;
+	height: 40px;
+	padding: 5px;
+	border-radius: 10px;
+}
+
+.icon:hover {
+	background-color: var(--elementBg);
+}
