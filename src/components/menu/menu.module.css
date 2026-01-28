@@ -37,27 +37,10 @@
 	background-color: var(--elementBg);
 }
 
-.menuItem {
-	display: flex;
-	align-items: center;
-	padding: 5px 20px;
-	border-radius: 5px;
-}
-
-.menuItem:hover {
-	cursor: pointer;
-	background-color: var(--elementBg);
-	color: var(--good);
-}
-
 .icon {
 	width: 40px;
 	height: 40px;
 	margin-right: 3px;
 	padding: 7px;
 	border-radius: 10px;
-}
-
-.text {
-	font-weight: 600;
 }

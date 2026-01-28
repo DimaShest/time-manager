@@ -1,5 +1,5 @@
 export const PROJECT_PRIORITY = {
-	LOW: 'lowPriority',
-	MEDIUM: 'mediumPriority',
-	HIGH: 'highPriority',
+	LOW: 'низкий',
+	MEDIUM: 'средний',
+	HIGH: 'высокий',
 };

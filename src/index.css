@@ -16,6 +16,11 @@
 	--highPriority: #4f1414;
 }
 
+:root,
+:root > div {
+	height: 100%;
+}
+
 body {
 	margin: 0;
 	font-family:

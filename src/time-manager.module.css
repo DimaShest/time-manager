@@ -1,0 +1,9 @@
+.timeManager {
+	margin: 15px calc(7%);
+}
+
+@media (max-width: 720px) {
+	.timeManager {
+		margin: 15px calc(5%);
+	}
+}

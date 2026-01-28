@@ -1,81 +1,80 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { PROJECT_PRIORITY } from '../../constants';
-import { projectsSlice } from '../../reducers';
-import { PageTitle } from '../../components';
-import { Loader } from '../../components/UI';
+import { useNavigate } from 'react-router-dom';
+import { appActions } from '../../reducers/appSlice';
+import { deleteProjectThunk, fetchProjectsThunk } from '../../reducers/projectsSlice';
+import { Modal, PageTitle } from '../../components';
+import { Button, Loader } from '../../components/UI';
 import { Project } from './components';
+import { PAGE, STATUS } from '../../constants';
 import styles from './projects.module.css';
 
-const projects = [
-	{
-		id: 4,
-		name: 'Трудоустройство Fronted Developer',
-		progress: 5,
-		priority: PROJECT_PRIORITY.HIGH,
-	},
-	{
-		id: 6,
-		name: 'Страница Авторизация в рамках time manager',
-		progress: 12,
-		priority: PROJECT_PRIORITY.HIGH,
-	},
-	{
-		id: 1,
-		name: 'Веб-приложение Блог в качестве практики на React',
-		progress: 88,
-		priority: PROJECT_PRIORITY.MEDIUM,
-	},
-	{
-		id: 3,
-		name: 'Страница Список проектов',
-		progress: 0,
-		priority: PROJECT_PRIORITY.MEDIUM,
-	},
-	{
-		id: 2,
-		name: 'Главная страница',
-		progress: 33,
-		priority: PROJECT_PRIORITY.LOW,
-	},
-	{
-		id: 5,
-		name: 'Страница Аналитика',
-		progress: 100,
-		priority: PROJECT_PRIORITY.LOW,
-	},
-];
-
 export const Projects = () => {
-	const [isLoading, setIsLoading] = useState(true);
+	const status = useSelector(({ projects }) => projects.status);
+	const projects = useSelector(({ projects }) => projects.projectsData);
+	const selectedProjectId = useSelector(({ projects }) => projects.selectedProjectId);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-	const { loadProjects } = projectsSlice.actions;
-
-	const loadedProjects = useSelector((state) => state.projects.projectsData);
+	useLayoutEffect(() => {
+		dispatch(appActions.setCurrentPage(PAGE.PROJECTS));
+	}, [dispatch]);
 
 	useEffect(() => {
-		setTimeout(() => {
-			setIsLoading(false);
-			dispatch(loadProjects(projects));
-		}, 500);
-	}, [dispatch, loadProjects]);
+		if (status === STATUS.RELOADING || status === STATUS.INIT) {
+			console.log(dispatch);
+			console.log('useEffect');
+			dispatch(fetchProjectsThunk());
+		}
+	}, [status, dispatch]);
 
-	if (isLoading) return <Loader />;
+	const onDeleteProject = () => {
+		dispatch(appActions.openModal('Удалить проект?'));
+	};
+
+	const onConfirm = () => {
+		dispatch(appActions.closeModal());
+		dispatch(deleteProjectThunk(selectedProjectId));
+	};
+
+	const onCancel = () => {
+		dispatch(appActions.closeModal());
+	};
+
+	if (
+		status === STATUS.LOADING ||
+		status === STATUS.RELOADING ||
+		status === STATUS.DELETING
+	)
+		return <Loader />;
 
 	return (
-		<div className={styles.projectsPage}>
-			<PageTitle>Список проектов</PageTitle>
-			<div className={styles.projectsList}>
-				{loadedProjects.map(({ id, name, priority, progress }) => (
-					<Project
-						key={id}
-						name={name}
-						priority={priority}
-						progress={progress}
-					/>
-				))}
+		status === STATUS.SUCCESS && (
+			<div className={styles.projectsPage}>
+				<div className={styles.flexSpace}>
+					<PageTitle>Список проектов</PageTitle>
+					<Button
+						onClick={() => navigate('/project')}
+						className={styles.button}
+					>
+						Новый проект
+					</Button>
+				</div>
+
+				<div className={styles.projectsList}>
+					{projects.map(({ id, name, priority, progress }) => (
+						<Project
+							key={id}
+							id={id}
+							name={name}
+							priority={priority}
+							progress={progress}
+							onDeleteProject={() => onDeleteProject(id)}
+						/>
+					))}
+				</div>
+				<Modal onConfirm={onConfirm} onCancel={onCancel} />
 			</div>
-		</div>
+		)
 	);
 };

@@ -1,0 +1,15 @@
+.input {
+	height: 30px;
+	min-width: 100px;
+	width: 100%;
+	background-color: var(--elementBg);
+	border: 1px solid var(--blue);
+	border-radius: 5px;
+	color: var(--white);
+	font-size: 16px;
+	padding: 5px;
+}
+
+.input:focus {
+	color: var(--good);
+}

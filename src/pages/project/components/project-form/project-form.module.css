@@ -1,0 +1,21 @@
+.label {
+	margin: 20px 0 10px 0;
+	display: block;
+	color: var(--white);
+}
+
+select {
+	height: 30px;
+	min-width: 100px;
+	width: 100%;
+	background-color: var(--elementBg);
+	border: 1px solid var(--blue);
+	border-radius: 5px;
+	color: var(--white);
+	font-size: 16px;
+	padding: 5px;
+}
+
+select option:focus {
+	color: var(--good);
+}

@@ -1,0 +1,26 @@
+.button {
+	min-width: 100px;
+	max-width: 200px;
+	width: 100%;
+	background-color: var(--elementBg);
+	color: var(--white);
+	font-weight: bold;
+	border-radius: 5px;
+	border: none;
+	border-bottom: 1px solid var(--white);
+	font-size: 16px;
+	padding: 10px;
+}
+
+.button:hover {
+	cursor: pointer;
+	background-color: var(--blue);
+	color: var(--good);
+}
+
+@media (max-width: 720px) {
+	.button {
+		font-size: 15px;
+		padding: 10px;
+	}
+}

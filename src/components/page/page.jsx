@@ -1,5 +1,12 @@
+import { useSelector } from 'react-redux';
 import styles from './page.module.css';
 
-export const Page = ({ children }) => (
-	<section className={styles.page}>{children}</section>
-);
+export const Page = ({ children }) => {
+	const isHidenMenu = useSelector(({ app }) => app.isHidenMenu);
+
+	return (
+		<main className={isHidenMenu ? styles.pageWithoutMenu : styles.pageWithMenu}>
+			{children}
+		</main>
+	);
+};

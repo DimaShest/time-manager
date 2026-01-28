@@ -1,10 +1,12 @@
 .project {
-	display: flex;
-	border-bottom: 2px solid var(--blue);
-	background: var(--elementBg);
-	border-radius: 10px;
-	margin-bottom: 10px;
 	position: relative;
+	display: flex;
+	text-decoration: none;
+	color: var(--white);
+	background: var(--elementBg);
+	border-bottom: 2px solid var(--blue);
+	border-radius: 15px;
+	margin-bottom: 10px;
 	min-height: 40px;
 	animation: show-project 0.3s linear forwards;
 }
@@ -23,13 +25,14 @@
 	align-items: center;
 	padding: calc(1.5%);
 	display: grid;
-	grid-template-columns: 1fr 30px 30px;
+	grid-template-columns: 1fr 30px;
 	gap: 20px;
 }
 
 .project:hover {
 	cursor: pointer;
 	position: relative;
+	color: var(--good);
 	animation: project-card 0.3s linear forwards;
 }
 
@@ -58,6 +61,12 @@
 	position: absolute;
 	border-radius: 10px;
 	height: 100%;
+}
+
+.controlPanel {
+	display: flex;
+	align-items: center;
+	margin: 5px;
 }
 
 .settingsBtn {

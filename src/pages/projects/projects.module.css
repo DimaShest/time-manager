@@ -3,6 +3,16 @@
 	margin-left: 10px;
 }
 
+.flexSpace {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.button {
+	margin: 0 0 0 20px;
+}
+
 @media (width: 480px) {
 	.projectsPage {
 		margin: 0;

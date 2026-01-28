@@ -1,0 +1,6 @@
+export const PAGE = {
+	MAIN: 'MAIN',
+	PROJECTS: 'PROJECTS',
+	ACCOUNT: 'ACCOUNT',
+	ANALYTICS: 'ANALYTICS',
+};

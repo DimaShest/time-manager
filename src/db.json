@@ -1,0 +1,28 @@
+{
+	"projects": [
+		{
+			"id": "4",
+			"name": "Трудоустройство Fronted Developer",
+			"progress": "5",
+			"priority": "высокий"
+		},
+		{
+			"id": "6",
+			"name": "Страница Авторизация в рамках time manager",
+			"progress": "12",
+			"priority": "высокий"
+		},
+		{
+			"id": "1",
+			"name": "Веб-приложение Блог в качестве практики на React",
+			"progress": "88",
+			"priority": "средний"
+		},
+		{
+			"id": "7",
+			"name": "Страница Аналитика",
+			"progress": "100",
+			"priority": "низкий"
+		}
+	]
+}
