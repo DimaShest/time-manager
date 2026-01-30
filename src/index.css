@@ -10,6 +10,7 @@
 	--white: #d4d8e2;
 	--blue: #2a3150;
 	--good: #fff;
+	--error: #f94d4d;
 
 	--lowPriority: #203d20;
 	--mediumPriority: #5e5e09;
@@ -34,6 +35,10 @@ body {
 		radial-gradient(circle at 0% 0%, rgba(108, 158, 255, 0.1), transparent 50%),
 		var(--bg);
 	color: var(--white);
+}
+
+body > div {
+	height: 100%;
 }
 
 code {

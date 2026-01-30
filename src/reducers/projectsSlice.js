@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { createProjectThunk, deleteProjectThunk, fetchProjectsThunk } from '../actions';
 import { STATUS } from '../constants';
-import { deleteProject, getProjects } from '../api';
 
 const initialState = {
 	projectsData: [],
@@ -14,11 +14,13 @@ export const projectsSlice = createSlice({
 	initialState,
 	reducers: {
 		setProjects(state, action) {
-			console.log('setPROjects');
 			state.projectsData = action.payload;
 		},
 		setSelectedProjectId(state, action) {
 			state.selectedProjectId = action.payload;
+		},
+		addProject(state, action) {
+			state.projectsData.push(action.payload);
 		},
 	},
 	extraReducers: (builder) =>
@@ -40,19 +42,16 @@ export const projectsSlice = createSlice({
 			})
 			.addCase(fetchProjectsThunk.rejected, (state) => {
 				state.status = STATUS.ERROR;
+			})
+			.addCase(createProjectThunk.pending, (state) => {
+				state.status = STATUS.CREATING;
+			})
+			.addCase(createProjectThunk.fulfilled, (state) => {
+				state.status = STATUS.RELOADING;
+			})
+			.addCase(createProjectThunk.rejected, (state) => {
+				state.status = STATUS.ERROR;
 			}),
 });
 
-export const deleteProjectThunk = createAsyncThunk('projects/delete', (id) => {
-	return deleteProject(id);
-});
-
 export const { reducer: projectsReducer, actions: projectsActions } = projectsSlice;
-
-export const fetchProjectsThunk = createAsyncThunk(
-	'projects/get',
-	async (_arg, { dispatch }) => {
-		const loadedProjects = await getProjects();
-		dispatch(projectsActions.setProjects(loadedProjects));
-	},
-);

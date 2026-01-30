@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { appActions } from '../../reducers/appSlice';
-import { deleteProjectThunk, fetchProjectsThunk } from '../../reducers/projectsSlice';
+import { deleteProjectThunk, fetchProjectsThunk } from '../../actions';
 import { Modal, PageTitle } from '../../components';
 import { Button, Loader } from '../../components/UI';
 import { Project } from './components';
@@ -22,8 +22,6 @@ export const Projects = () => {
 
 	useEffect(() => {
 		if (status === STATUS.RELOADING || status === STATUS.INIT) {
-			console.log(dispatch);
-			console.log('useEffect');
 			dispatch(fetchProjectsThunk());
 		}
 	}, [status, dispatch]);
@@ -61,7 +59,12 @@ export const Projects = () => {
 					</Button>
 				</div>
 
-				<div className={styles.projectsList}>
+				<div>
+					{projects.length === 0 && (
+						<div className={styles.missingProjects}>
+							Нет ни одного проекта
+						</div>
+					)}
 					{projects.map(({ id, name, priority, progress }) => (
 						<Project
 							key={id}

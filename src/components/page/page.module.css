@@ -1,5 +1,5 @@
 .pageWithMenu {
-	margin: 15px calc(7%) 10px calc(160px + 7%);
+	margin: 15px 0 10px 160px;
 	position: relative;
 	max-width: 1000px;
 	min-height: 100%;
@@ -15,5 +15,6 @@
 	.pageWithMenu,
 	.pageWithoutMenu {
 		margin: 0 auto;
+		min-height: 100%;
 	}
 }

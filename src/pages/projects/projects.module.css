@@ -13,6 +13,12 @@
 	margin: 0 0 0 20px;
 }
 
+.missingProjects {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
 @media (width: 480px) {
 	.projectsPage {
 		margin: 0;

@@ -3,43 +3,30 @@
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-}
-
-.loader {
-	position: absolute;
-	top: 6px;
-	left: 6px;
+	background-color: var(--good);
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
-	border-top: 7px solid var(--white);
-	animation: loading 1s linear infinite;
 }
 
 .bg {
 	position: absolute;
-	width: 56px;
-	height: 56px;
+	width: 40px;
+	height: 40px;
 
-	border-top: 28px solid var(--bg);
+	border-top: 12px solid var(--bg);
 	border-radius: 50%;
-	animation: loading-bg 1s linear infinite;
-}
-
-@keyframes loading {
-	0% {
-		transform: rotate(90deg);
-	}
-	100% {
-		transform: rotate(270deg);
-	}
+	animation: loading-bg 5s linear infinite;
 }
 
 @keyframes loading-bg {
 	0% {
-		transform: rotate(90deg);
+		transform: rotate(0deg);
+	}
+	75% {
+		transform: rotate(720deg);
 	}
 	100% {
-		transform: rotate(630deg);
+		transform: rotate(2520deg);
 	}
 }

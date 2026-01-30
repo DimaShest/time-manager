@@ -12,6 +12,7 @@ export const Project = ({ id, name, priority, progress, onDeleteProject }) => {
 	const [isShowSettings, setIsShowSettings] = useState(false);
 	const selectedProjectId = useSelector(({ projects }) => projects.selectedProjectId);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { hint, onHint } = useHint();
 
 	const delayedOnHint = useMemo(() => deboounce(onHint, 250), [onHint]);
@@ -20,7 +21,9 @@ export const Project = ({ id, name, priority, progress, onDeleteProject }) => {
 		setIsShowSettings(false);
 	}
 
-	const navigate = useNavigate();
+	// --------------- (TODO) БУДЕТ ВЫПОЛНЯТЬСЯ НА СЕРВЕРЕ
+	// if (progressDetemination === PROGRESS_DETERMINATION.TIME)
+	// 	progress = timeSpent / timeComplete;
 
 	return (
 		<div className={styles.project}>

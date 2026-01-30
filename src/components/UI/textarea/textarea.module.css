@@ -1,0 +1,16 @@
+.textarea {
+	width: 100%;
+	min-height: 100px;
+	font-size: 16px;
+	padding: 5px;
+	margin-bottom: 20px;
+	background-color: var(--elementBg);
+	color: var(--white);
+	border: 1px solid var(--blue);
+	border-radius: 7px;
+	resize: vertical;
+}
+
+.textarea:hover {
+	color: var(--good);
+}

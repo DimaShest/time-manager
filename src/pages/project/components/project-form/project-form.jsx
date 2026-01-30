@@ -1,30 +1,72 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { createProjectThunk } from '../../../../actions';
 import { PageTitle } from '../../../../components';
-import { Input } from '../../../../components/UI';
+import { Button, Input, Loader, Textarea } from '../../../../components/UI';
+import { PROGRESS_DETERMINATION, PROJECT_PRIORITY, STATUS } from '../../../../constants';
+import { getNameValidationError, getDescriptionValidationError } from './utils';
 import styles from './project-form.module.css';
-import { PROJECT_PRIORITY } from '../../../../constants';
+
+// ------(TODO) progress, timeSpent БУДУТ ДОБАВЛЯТЬСЯ НА СЕРВЕРЕ, А НЕ ЗДЕСЬ
+const INITIAL_PROJECT = {
+	id: null,
+	name: '',
+	description: '',
+	progress: 0,
+	timeComplete: 0,
+	timeSpent: 0,
+	priority: PROJECT_PRIORITY.LOW,
+	progressDetemination: PROGRESS_DETERMINATION.TIME,
+};
 
 export const ProjectForm = () => {
-	const [project, setProject] = useState({
-		id: null,
-		name: '',
-		timeComplete: 0,
-		priority: PROJECT_PRIORITY.LOW,
-	});
+	const [project, setProject] = useState(INITIAL_PROJECT);
+	const [validationError, setValidationError] = useState(null);
+
+	const dispatch = useDispatch();
+	const navigation = useNavigate();
+	const status = useSelector(({ projects }) => projects.status);
+
+	const onChange = (value, fieldName) =>
+		setProject((project) => ({ ...project, [fieldName]: value }));
+
+	const onCreateProject = async (e) => {
+		e.preventDefault();
+		const error =
+			getNameValidationError(project.name) ||
+			getDescriptionValidationError(project.description);
+
+		if (error) {
+			setValidationError(error);
+			return;
+		}
+
+		setValidationError(null);
+		await dispatch(createProjectThunk(project));
+		navigation('/projects');
+	};
 
 	return (
-		<div className={styles.projectForm}>
+		<form className={styles.projectForm} onSubmit={onCreateProject}>
+			{status === STATUS.CREATING && <Loader />}
 			<PageTitle>Создание нового проекта</PageTitle>
 			<label className={styles.label} htmlFor="name">
-				Название:
+				Название (обязательное):
 			</label>
 			<Input
 				id="name"
 				value={project.name}
 				type="text"
-				onChange={({ target }) =>
-					setProject((project) => ({ ...project, name: target.value }))
-				}
+				onChange={({ target }) => onChange(target.value, 'name')}
+			/>
+			<label className={styles.label} htmlFor="description">
+				Описание:
+			</label>
+			<Textarea
+				id="description"
+				value={project.description}
+				onChange={({ target }) => onChange(target.value, 'description')}
 			/>
 			<label className={styles.label} htmlFor="timeComplete">
 				Время на выполнение (в часах):
@@ -33,9 +75,7 @@ export const ProjectForm = () => {
 				id="timeComplete"
 				value={project.timeComplete}
 				type="number"
-				onChange={({ target }) =>
-					setProject((project) => ({ ...project, timeComplete: target.value }))
-				}
+				onChange={({ target }) => onChange(Number(target.value), 'timeComplete')}
 			/>
 			<label className={styles.label} htmlFor="priority">
 				Приоритет:
@@ -43,9 +83,7 @@ export const ProjectForm = () => {
 			<select
 				id="priority"
 				value={project.priority}
-				onChange={({ target }) =>
-					setProject((project) => ({ ...project, priority: target.value }))
-				}
+				onChange={({ target }) => onChange(target.value, 'priority')}
 			>
 				{Object.values(PROJECT_PRIORITY).map((priority) => (
 					<option key={priority} value={priority}>
@@ -53,6 +91,26 @@ export const ProjectForm = () => {
 					</option>
 				))}
 			</select>
-		</div>
+			<label className={styles.label} htmlFor="depenceProgress ">
+				Как определяется прогресс:
+			</label>
+			<select
+				id="depenceProgress"
+				value={project.depenceProgress}
+				onChange={({ target }) => onChange(target.value, 'progressDetemination')}
+			>
+				{Object.values(PROGRESS_DETERMINATION).map((determination) => (
+					<option key={determination} value={determination}>
+						{determination}
+					</option>
+				))}
+			</select>
+			{!!validationError && (
+				<label className={styles.error}>{validationError}</label>
+			)}
+			<Button className={styles.createBtn} type="submit">
+				Создать
+			</Button>
+		</form>
 	);
 };

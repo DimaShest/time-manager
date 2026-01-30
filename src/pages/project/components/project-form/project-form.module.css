@@ -1,5 +1,11 @@
+.projectForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 .label {
-	margin: 20px 0 10px 0;
+	margin-bottom: 5px;
 	display: block;
 	color: var(--white);
 }
@@ -14,8 +20,20 @@ select {
 	color: var(--white);
 	font-size: 16px;
 	padding: 5px;
+	margin-bottom: 20px;
 }
 
-select option:focus {
-	color: var(--good);
+select > option {
+	color: var(--white);
+	background: var(--blue);
+}
+
+.error {
+	color: var(--error);
+	font-weight: bold;
+	margin: 0 auto;
+}
+
+.createBtn {
+	margin: 20px auto 20px auto;
 }
