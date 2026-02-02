@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { appActions } from '../../reducers/appSlice';
+import { appActions } from '../../reducers';
 import { deleteProjectThunk, fetchProjectsThunk } from '../../actions';
 import { Modal, PageTitle } from '../../components';
 import { Button, Loader } from '../../components/UI';
@@ -21,7 +21,11 @@ export const Projects = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		if (status === STATUS.RELOADING || status === STATUS.INIT) {
+		dispatch(fetchProjectsThunk());
+	}, [dispatch]);
+
+	useEffect(() => {
+		if (status === STATUS.RELOADING) {
 			dispatch(fetchProjectsThunk());
 		}
 	}, [status, dispatch]);
@@ -39,45 +43,39 @@ export const Projects = () => {
 		dispatch(appActions.closeModal());
 	};
 
-	if (
-		status === STATUS.LOADING ||
-		status === STATUS.RELOADING ||
-		status === STATUS.DELETING
-	)
-		return <Loader />;
-
 	return (
-		status === STATUS.SUCCESS && (
-			<div className={styles.projectsPage}>
-				<div className={styles.flexSpace}>
-					<PageTitle>Список проектов</PageTitle>
-					<Button
-						onClick={() => navigate('/project')}
-						className={styles.button}
-					>
-						Новый проект
-					</Button>
-				</div>
-
-				<div>
-					{projects.length === 0 && (
-						<div className={styles.missingProjects}>
-							Нет ни одного проекта
-						</div>
-					)}
-					{projects.map(({ id, name, priority, progress }) => (
-						<Project
-							key={id}
-							id={id}
-							name={name}
-							priority={priority}
-							progress={progress}
-							onDeleteProject={() => onDeleteProject(id)}
-						/>
-					))}
-				</div>
-				<Modal onConfirm={onConfirm} onCancel={onCancel} />
+		<div className={styles.projectsPage}>
+			{(status === STATUS.LOADING ||
+				status === STATUS.RELOADING ||
+				status === STATUS.DELETING) && <Loader />}
+			<div className={styles.flexSpace}>
+				<PageTitle>Список проектов</PageTitle>
+				<Button
+					onClick={() => {
+						navigate('/project');
+					}}
+					className={styles.button}
+				>
+					Новый проект
+				</Button>
 			</div>
-		)
+
+			<div>
+				{status === STATUS.SUCCESS && projects.length === 0 && (
+					<div className={styles.missingProjects}>Нет ни одного проекта</div>
+				)}
+				{projects.map(({ id, name, priority, progress }) => (
+					<Project
+						key={id}
+						id={id}
+						name={name}
+						priority={priority}
+						progress={progress}
+						onDeleteProject={() => onDeleteProject(id)}
+					/>
+				))}
+			</div>
+			<Modal onConfirm={onConfirm} onCancel={onCancel} />
+		</div>
 	);
 };

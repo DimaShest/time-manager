@@ -30,7 +30,7 @@ export const Menu = () => {
 		return (
 			<img
 				className={`${styles.hidenMenu} ${styles.icon}`}
-				src="back-icon.png"
+				src="/back-icon.png"
 				alt="back-icon"
 				onClick={() => {
 					dispatch(appActions.showMenu());
@@ -46,7 +46,7 @@ export const Menu = () => {
 				<>
 					<img
 						className={`${styles.hidenMenu} ${styles.icon}`}
-						src="forward-icon.png"
+						src="/forward-icon.png"
 						alt="back-icon"
 						onClick={() => dispatch(appActions.hideMenu())}
 					/>
@@ -64,7 +64,7 @@ export const Menu = () => {
 						key={'LOGOUT'}
 						id={'LOGOUT'}
 						name={'Выход'}
-						iconSrc={'logout-icon.png'}
+						iconSrc={'/logout-icon.png'}
 						onClick={() => onPage('/login')}
 					/>
 				</>

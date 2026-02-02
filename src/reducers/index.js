@@ -1,2 +1,2 @@
-export * from './projectsSlice';
-export * from './appSlice';
+export * from './projectsSlice.js';
+export * from './appSlice.js';

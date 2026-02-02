@@ -1,20 +1,29 @@
-.pageWithMenu {
-	margin: 15px 0 10px 160px;
+.pageWithMenu,
+.pageWithoutMenu {
 	position: relative;
-	max-width: 1000px;
-	min-height: 100%;
+	height: 100%;
+}
+
+.pageWithMenu {
+	margin: 0 0 0 200px;
 }
 
 .pageWithoutMenu {
-	position: relative;
-	max-width: 1000px;
 	margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+	.pageWithMenu,
+	.pageWithoutMenu {
+		margin: 0 0 0 200px;
+		height: 100%;
+	}
 }
 
 @media (max-width: 720px) {
 	.pageWithMenu,
 	.pageWithoutMenu {
 		margin: 0 auto;
-		min-height: 100%;
+		height: 100%;
 	}
 }

@@ -66,7 +66,11 @@ export const Project = ({ id, name, priority, progress, onDeleteProject }) => {
 				{isShowSettings && (
 					<div className={styles.settingsPanel}>
 						<div className={styles.flexRow}></div>
-						<img src="settings-icon.svg" className={styles.icon} />
+						<img
+							src="settings-icon.svg"
+							className={styles.icon}
+							onClick={() => navigate(`/project/${id}/edit`)}
+						/>
 						<img src="select-icon.png" className={styles.icon} />
 						<img
 							src="trash-icon.png"

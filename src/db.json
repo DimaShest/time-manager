@@ -2,159 +2,19 @@
   "projects": [
     {
       "id": 3,
-      "name": "Страница создания нового проекта",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
+      "name": "Страница создания нового проекта 1221",
+      "description": "Страница содержит форму проекта, которая в свою очередь содержит поля: название, описание, дата создания, дата последней работы над проектом, затраченное время на выполнение, количество времени на выполнение, приоритетность выполнения (низкий, средний, высокий), прогресс (в зависимости от времени или определение пользователем), интервалы для отдыха и выполнения данного проекта...",
+      "progress": 90,
+      "timeComplete": 1.1111111111111112e+69,
       "timeSpent": 0,
       "priority": "высокий",
-      "progressDetemination": "отношением затраченного времени к установленному"
+      "progressDetemination": "пользователем"
     },
     {
       "id": 4,
-      "name": "Страница Список проектов",
+      "name": "Страница Список проектов 222311111122",
       "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 5,
-      "name": "ввввввввУУУУУУУУУ",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 13,
-      "name": "",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 14,
-      "name": "DimaShestakov",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 15,
-      "name": "",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 16,
-      "name": "",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 17,
-      "name": "dddd",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 18,
-      "name": "wfdвв11++",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 19,
-      "name": "wfd11",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 20,
-      "name": "Новый проект ",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 21,
-      "name": "dddddddd111в",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 22,
-      "name": "11111111111111111111вввввввввввввввввввв",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 23,
-      "name": "111",
-      "description": ":::",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 24,
-      "name": "111",
-      "description": "",
-      "progress": 0,
-      "timeComplete": 0,
-      "timeSpent": 0,
-      "priority": "низкий",
-      "progressDetemination": "отношением затраченного времени к установленному"
-    },
-    {
-      "id": 25,
-      "name": "DEV",
-      "description": "",
-      "progress": 0,
+      "progress": 90,
       "timeComplete": 0,
       "timeSpent": 0,
       "priority": "низкий",

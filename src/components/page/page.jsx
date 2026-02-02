@@ -5,8 +5,8 @@ export const Page = ({ children }) => {
 	const isHidenMenu = useSelector(({ app }) => app.isHidenMenu);
 
 	return (
-		<main className={isHidenMenu ? styles.pageWithoutMenu : styles.pageWithMenu}>
+		<div className={isHidenMenu ? styles.pageWithoutMenu : styles.pageWithMenu}>
 			{children}
-		</main>
+		</div>
 	);
 };

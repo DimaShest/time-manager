@@ -1,6 +1,6 @@
 .menu {
 	position: fixed;
-	top: 0;
+	top: 0px;
 	left: 0;
 	bottom: 0;
 	display: flex;
@@ -16,7 +16,7 @@
 		width: 0;
 	}
 	to {
-		width: 160px;
+		width: 200px;
 	}
 }
 
@@ -25,7 +25,8 @@
 }
 
 .hidenMenu {
-	position: absolute;
+	position: fixed;
+	z-index: 35;
 	top: 12px;
 	left: 10px;
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createProjectThunk } from '../../../../actions';
+import { createProjectThunk, updateProjectThunk } from '../../../../actions';
 import { PageTitle } from '../../../../components';
 import { Button, Input, Loader, Textarea } from '../../../../components/UI';
 import { PROGRESS_DETERMINATION, PROJECT_PRIORITY, STATUS } from '../../../../constants';
@@ -20,8 +20,10 @@ const INITIAL_PROJECT = {
 	progressDetemination: PROGRESS_DETERMINATION.TIME,
 };
 
-export const ProjectForm = () => {
-	const [project, setProject] = useState(INITIAL_PROJECT);
+export const ProjectForm = ({ project = null, isEditing = false }) => {
+	const [editableProject, setEditableProject] = useState(
+		isEditing ? project : INITIAL_PROJECT,
+	);
 	const [validationError, setValidationError] = useState(null);
 
 	const dispatch = useDispatch();
@@ -29,13 +31,16 @@ export const ProjectForm = () => {
 	const status = useSelector(({ projects }) => projects.status);
 
 	const onChange = (value, fieldName) =>
-		setProject((project) => ({ ...project, [fieldName]: value }));
+		setEditableProject((editableProject) => ({
+			...editableProject,
+			[fieldName]: value,
+		}));
 
 	const onCreateProject = async (e) => {
 		e.preventDefault();
 		const error =
-			getNameValidationError(project.name) ||
-			getDescriptionValidationError(project.description);
+			getNameValidationError(editableProject.name) ||
+			getDescriptionValidationError(editableProject.description);
 
 		if (error) {
 			setValidationError(error);
@@ -43,20 +48,28 @@ export const ProjectForm = () => {
 		}
 
 		setValidationError(null);
-		await dispatch(createProjectThunk(project));
-		navigation('/projects');
+
+		if (isEditing) {
+			await dispatch(updateProjectThunk(editableProject));
+			navigation(`/project/${project.id}`);
+		} else {
+			await dispatch(createProjectThunk(editableProject));
+			navigation('/projects');
+		}
 	};
 
 	return (
 		<form className={styles.projectForm} onSubmit={onCreateProject}>
-			{status === STATUS.CREATING && <Loader />}
-			<PageTitle>Создание нового проекта</PageTitle>
+			{(status === STATUS.CREATING || status === STATUS.UPDATING) && <Loader />}
+			<PageTitle>
+				{isEditing ? 'Редактирование проекта' : 'Создание нового проекта'}
+			</PageTitle>
 			<label className={styles.label} htmlFor="name">
 				Название (обязательное):
 			</label>
 			<Input
 				id="name"
-				value={project.name}
+				value={editableProject.name}
 				type="text"
 				onChange={({ target }) => onChange(target.value, 'name')}
 			/>
@@ -65,7 +78,7 @@ export const ProjectForm = () => {
 			</label>
 			<Textarea
 				id="description"
-				value={project.description}
+				value={editableProject.description}
 				onChange={({ target }) => onChange(target.value, 'description')}
 			/>
 			<label className={styles.label} htmlFor="timeComplete">
@@ -73,7 +86,7 @@ export const ProjectForm = () => {
 			</label>
 			<Input
 				id="timeComplete"
-				value={project.timeComplete}
+				value={editableProject.timeComplete}
 				type="number"
 				onChange={({ target }) => onChange(Number(target.value), 'timeComplete')}
 			/>
@@ -82,7 +95,7 @@ export const ProjectForm = () => {
 			</label>
 			<select
 				id="priority"
-				value={project.priority}
+				value={editableProject.priority}
 				onChange={({ target }) => onChange(target.value, 'priority')}
 			>
 				{Object.values(PROJECT_PRIORITY).map((priority) => (
@@ -96,7 +109,7 @@ export const ProjectForm = () => {
 			</label>
 			<select
 				id="depenceProgress"
-				value={project.depenceProgress}
+				value={editableProject.depenceProgress}
 				onChange={({ target }) => onChange(target.value, 'progressDetemination')}
 			>
 				{Object.values(PROGRESS_DETERMINATION).map((determination) => (
@@ -108,8 +121,12 @@ export const ProjectForm = () => {
 			{!!validationError && (
 				<label className={styles.error}>{validationError}</label>
 			)}
-			<Button className={styles.createBtn} type="submit">
-				Создать
+			<Button
+				className={styles.createBtn}
+				type="submit"
+				disabled={status === STATUS.CREATING || status === STATUS.UPDATING}
+			>
+				{isEditing ? 'Сохранить измения' : 'Создать'}
 			</Button>
 		</form>
 	);

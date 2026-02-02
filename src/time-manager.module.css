@@ -1,11 +1,20 @@
-.timeManager {
-	margin: 15px calc(7%);
-	height: 100%;
+.main {
+	max-width: 1000px;
+	position: relative;
+	min-height: calc(100% - 90px);
+	margin: 0 auto;
+}
+
+@media (max-width: 1300px) {
+	.main {
+		margin: 0 calc(7%) 0 calc(7%);
+		min-height: 100%;
+	}
 }
 
 @media (max-width: 720px) {
-	.timeManager {
-		margin: 15px calc(5%);
-		height: 100%;
+	.main {
+		margin: 0 calc(5%) 0 calc(5%);
+		min-height: 100%;
 	}
 }
